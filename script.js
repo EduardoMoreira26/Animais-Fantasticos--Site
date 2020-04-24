@@ -1,47 +1,20 @@
-//selecionar elemento do document pelo ID
-const animais = document.getElementById("animais");
+//Criacção de navegação pelo click do usuário nas imagens.
+const tabMenu = document.querySelectorAll(".js-tabmenu li");
+const tabContent = document.querySelectorAll(".js-tabcontent section");
 
-//selecionar elemento pela class
-const gridSection = document.getElementsByClassName("grid-section");
-
-//selecionar elemento pela tag
-const lista = document.getElementsByTagName("ul");
-
-//querySelector seleciona da mesma forma que CSS com ex : ".animais"
-// const animais = document.querySelector(".animais");
-
-const primeiraLi = document.querySelector("li");
-console.log(primeiraLi);
-
-const primeiraUl = document.querySelector("ul");
-console.log(primeiraUl);
-
-const linkInterno = document.querySelector("[href^='#']");
-console.log(linkInterno);
-
-//Selecionar todos elementos que tiver a class
-const animaisImg = document.querySelectorAll(".animais img");
-
-console.log(animaisImg);
-
-//DIferença entre estatico e ao vivo
-//ao vivo atualiza na hora qualquer modificacao ex: getElements
-//estatico nao atualiza ex: queryselector
-
-const gridSectionHTML = document.getElementsByClassName("grid-section");
-
-const gridSectionNode = document.querySelectorAll(".grid-section");
-
-//querySelector tem forEach no get nao tem
-//para acessar forEach no get tem que trasformar em um array
-gridSectionNode.forEach(function (item, index) {
-  console.log(item);
-});
-
-//trasformar em ARRAY para ter acessos a metodos de array
-
-const arrayGrid = Array.from(gridSectionHTML);
-
-arrayGrid.forEach(function (item) {
-  console.log(item);
-});
+if (tabMenu.length && tabContent.length) {
+  tabContent[0].classList.add("ativo");
+  //função que inclui a classe ativo nas secton e remove das outras
+  function activeTab(index) {
+    tabContent.forEach((section) => {
+      section.classList.remove("ativo");
+    });
+    tabContent[index].classList.add("ativo");
+  }
+  //evento para mudar class ativo nos itens pelo click
+  tabMenu.forEach((itemMenu, index) => {
+    itemMenu.addEventListener("click", () => {
+      activeTab(index);
+    });
+  });
+}
