@@ -46,3 +46,61 @@ function initAccordion() {
   }
 }
 initAccordion();
+
+//function scroll suave
+function initScrollSuave() {
+  const linksInternos = document.querySelectorAll(".js-menu a[href^='#']");
+
+  function scrollToSection(event) {
+    //linkando href com ID das section
+    event.preventDefault();
+    const href = event.currentTarget.getAttribute("href");
+    const section = document.querySelector(href);
+
+    //criando efeito scroll ate o topo
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+
+    //forma alternativa
+    // const topo = section.offsetTop;
+    //efeito scroll passado por objeto
+    // window.scrollTo({
+    //   top: topo,
+    //   behavior: "smooth",
+    // });
+  }
+
+  //adicionando um evento ao clique
+  linksInternos.forEach((link) => {
+    link.addEventListener("click", scrollToSection);
+  });
+}
+initScrollSuave();
+
+//Function animação ao scroll
+function initiAnimationScroll() {
+  const sections = document.querySelectorAll(".js-scroll");
+
+  if (sections.length) {
+    //variavel que calcula tamanho da tela para criar animação evitando tela em branco
+    const windowMetade = window.innerHeight * 0.6;
+
+    //function que calcula o topo da section com o scroll
+    function animaScroll() {
+      sections.forEach((section) => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const isSectionVisible = sectionTop - windowMetade < 0;
+        if (isSectionVisible) section.classList.add("ativo");
+        else section.classList.remove("ativo");
+      });
+    }
+
+    animaScroll();
+
+    window.addEventListener("scroll", animaScroll);
+  }
+}
+
+initiAnimationScroll();
