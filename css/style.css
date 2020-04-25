@@ -258,3 +258,39 @@ body {
     transform: translate3d(0, 0, 0);
   }
 }
+
+/* JavaScript FAQ acoordion Lista */
+.js .js-accordion dd {
+  display: none;
+
+}
+
+.js-accordion dt {
+  cursor: pointer;
+}
+
+.js-accordion dt::after {
+  content: "⬎";
+  margin-left: 10px;
+}
+
+.js-accordion dt.ativo::after {
+  content: "⬏";
+}
+
+.js-accordion dd.ativo {
+  display: block;
+  animation: slideDown .5s forwards;
+}
+
+@keyframes slideDown {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  to {
+    max-height: 200px;
+    opacity: 1;
+  }
+}
